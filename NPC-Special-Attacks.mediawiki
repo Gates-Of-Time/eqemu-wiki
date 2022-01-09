@@ -1,0 +1,1074 @@
+* Changelog from 07/11/2013 -- npcspecialattks field (listed as "old code" below) was removed and a new field special_abilities was added (numerical codes below)
+* Each special ability specification must be separated by a caret symbol ( ^ )
+* Every special ability must be followed by a comma and a level indicator in order to be recognized.
+* Parameters follow the Level specifier, also separated by commas.
+* Unless otherwise specified, Level 1 = ON, Level 0 = OFF
+* Example: Old code of "Hn" for "Will Not Aggro" and "Does NOT buff/heal friends". New code: 24,1^30,1
+
+__TOC__
+
+== Summon ==
+
+Summon, denoted by special attack 1 or "S" (old code), allows you to teleport the player to the NPC, or the NPC to the player.  
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="13"| Summon
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Level 1 || Summon Target to NPC || 0
+|-
+! colspan="2" | Level 2 || Summon NPC to Target || 0
+|-
+! colspan="2" | Parameter 0 || Cooldown in ms || 6000
+|-
+! colspan="2" | Parameter 1 || HP ratio required to summon || 97
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 1,1,2,10000,90
+| 1 
+| colspan="3" | Special Attack "Summon"
+|-
+| 1 
+| colspan="3" | Special Attack "Summon" enabled
+|-
+| 2 
+| colspan="3" | Summon npc to target enabled
+|-
+| 10000 
+| colspan="3" | 10 second cooldown
+|-
+| 90 
+| colspan="3" | Requires 90 percent or less HP
+|}
+
+== Enrage ==
+
+Enrage, denoted by special attack 2 or "E" (old code), allows the NPC to riposte incoming melee attacks.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="12"| Enrage
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Parameter 0 || HP percent required to enrage || Rule: NPC:StartEnrageValue
+|-
+! colspan="2" | Parameter 1 || Duration of Special Attack in ms || 10000
+|-
+! colspan="2" | Parameter 2 || Cooldown of Special Attack in ms || 360000
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 2,1,25,8000,60000
+| 2 
+| colspan="3" | Special Attack "Enrage"
+|-
+| 1 
+| colspan="3" | Special Attack "Enrage" enabled
+|-
+| 25 
+| colspan="3" | Begin Special Attack when HP reaches 25 percent
+|-
+| 8000 
+| colspan="3" | Special Attack will last 8 seconds
+|-
+| 60000 
+| colspan="3" | Special Attack will cooldown in 1 minute
+|}
+
+== Rampage ==
+
+Rampage, denoted by special attack 3 or "R" (old code), allows the NPC to attack additional players.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="17"| Rampage
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Parameter 0 || Percent chance of Special Attack Proc || 20 percent
+|-
+! colspan="2" | Parameter 1 || Special Attack Target Count || Rule: Combat:MaxRampageTargets
+|-
+! colspan="2" | Parameter 2 || Percent of a normal attack damage to deal || 100
+|-
+! colspan="2" | Parameter 3 || Flat damage bonus to add to the Special Attack || 0
+|-
+! colspan="2" | Parameter 4 || Percent of AC ignored for the Special Attack || 0
+|-
+! colspan="2" | Parameter 5 || Flat amount of AC ignored for the Special Attack || 0
+|-
+! colspan="2" | Parameter 6 || Percent of natural crit used by this Special Attack || 100
+|-
+! colspan="2" | Parameter 7 || Flat crit bonus to add to base crit for the Special Attack || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 3,1,15,1,75
+| 3 
+| colspan="3" | Special Attack "Rampage"
+|-
+| 1 
+| colspan="3" | Special Attack "Rampage" enabled
+|-
+| 15 
+| colspan="3" | 15 percent chance to proc
+|-
+| 1 
+| colspan="3" | 1 target
+|-
+| 75
+| colspan="3" | 75 percent of normal damage
+|}
+
+== Area Rampage ==
+
+Area Rampage, denoted by special attack 4 or "r" (old code), allows the NPC to attack additional players.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="17"| Area Rampage
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Parameter 0 || Percent chance of Special Attack Proc || 20 percent
+|-
+! colspan="2" | Parameter 1 || Special Attack Target Count || -1 (all in range)
+|-
+! colspan="2" | Parameter 2 || Percent of a normal attack damage to deal || 100
+|-
+! colspan="2" | Parameter 3 || Flat damage bonus to add to the Special Attack || 0
+|-
+! colspan="2" | Parameter 4 || Percent of AC ignored for the Special Attack || 0
+|-
+! colspan="2" | Parameter 5 || Flat amount of AC ignored for the Special Attack || 0
+|-
+! colspan="2" | Parameter 6 || Percent of natural crit used by this Special Attack || 100
+|-
+! colspan="2" | Parameter 7 || Flat crit bonus to add to base crit for the Special Attack || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 4,1,15,-1,75
+| 4 
+| colspan="3" | Special Attack "Area Rampage"
+|-
+| 1 
+| colspan="3" | Special Attack "Area Rampage" enabled
+|-
+| 15 
+| colspan="3" | 15 percent chance to proc
+|-
+| 1 
+| colspan="3" | All targets within range
+|-
+| 75
+| colspan="3" | 75 percent of normal damage
+|}
+
+== Flurry ==
+
+Flurry, denoted by special attack 5 or "F" (old code), allows the NPC to have additional melee attacks against a player.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="17"| Flurry
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Parameter 0 || Percent chance of Special Attack Proc || Rule: Combat:NPCFlurryChance
+|-
+! colspan="2" | Parameter 1 || Special Attack count || Rule: Combat:MaxFlurryHits
+|-
+! colspan="2" | Parameter 2 || Percent of a normal attack damage to deal || 100
+|-
+! colspan="2" | Parameter 3 || Flat damage bonus to add to the Special Attack || 0
+|-
+! colspan="2" | Parameter 4 || Percent of AC ignored for the Special Attack || 0
+|-
+! colspan="2" | Parameter 5 || Flat amount of AC ignored for the Special Attack || 0
+|-
+! colspan="2" | Parameter 6 || Percent of natural crit used by this Special Attack || 100
+|-
+! colspan="2" | Parameter 7 || Flat crit bonus to add to base crit for the Special Attack || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 5,1,25,5,50
+| 5 
+| colspan="3" | Special Attack "Flurry"
+|-
+| 1 
+| colspan="3" | Special Attack "Flurry" enabled
+|-
+| 25 
+| colspan="3" | 25 percent chance to proc
+|-
+| 5
+| colspan="3" | 5 added attacks
+|-
+| 50
+| colspan="3" | 50 percent of normal damage
+|}
+
+== Triple Attack ==
+
+Triple Attack, denoted by special attack 6 or "T" (old code), allows the NPC to have three melee attacks against a player.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="7"| Triple Attack
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Bool || 1 = on, 0 = off || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 6,1
+| 6
+| colspan="3" | Special Attack "Triple Attack"
+|-
+| 1 
+| colspan="3" | Special Attack "Triple Attack" enabled
+|}
+
+== Quad Attack ==
+
+Quad Attack, denoted by special attack 7 or "Q" (old code), allows the NPC to have four melee attacks against a player.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="7"| Quad Attack
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Bool || 1 = on, 0 = off || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 7,1
+| 7
+| colspan="3" | Special Attack "Quad Attack"
+|-
+| 1 
+| colspan="3" | Special Attack "Quad Attack" enabled
+|}
+
+== Dual Wield ==
+
+Dual Wield, denoted by special attack 8 or "L" (old code), allows the NPC to utilize two weapons.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="7"| Dual Wield
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Bool || 1 = on, 0 = off || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 8,1
+| 8
+| colspan="3" | Special Attack "Dual Wield"
+|-
+| 1 
+| colspan="3" | Special Attack "Dual Wield" enabled
+|}
+
+== Bane Attack ==
+
+Bane Attack, denoted by special attack 9 or "b" (old code), gives the NPC the ability to hit NPCs that require bane weapons to damage.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="7"| Bane Attack
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Bool || 1 = on, 0 = off || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 9,1
+| 9
+| colspan="3" | Special Attack "Bane Attack"
+|-
+| 1 
+| colspan="3" | Special Attack "Bane Attack" enabled
+|}
+
+== Magical Attack ==
+
+Magical Attack, denoted by special attack 10 or "m" (old code), gives the NPC the ability to hit NPCs that require magical weapons to damage.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="7"| Magical Attack
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Bool || 1 = on, 0 = off || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 10,1
+| 10
+| colspan="3" | Special Attack "Magical Attack"
+|-
+| 1 
+| colspan="3" | Special Attack "Magical Attack" enabled
+|}
+
+== Ranged Attack ==
+
+Ranged Attack, denoted by special attack 11 or "Y" (old code), gives the NPC the ability to perform ranged attacks if their target is out of melee range.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="12"| Ranged Attack
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Parameter 0 || Minimum ranged distance || 25
+|-
+! colspan="2" | Parameter 1 || Maximum ranged distance || 250
+|-
+! colspan="2" | Parameter 2 || Percent hit chance modifier || 0
+|-
+! colspan="2" | Parameter 3 || Percent damage modifier || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 11,1,50
+| 11
+| colspan="3" | Special Attack "Ranged Attack"
+|-
+| 1 
+| colspan="3" | Special Attack "Ranged Attack" enabled
+|-
+| 50 
+| colspan="3" | Minimum distance 50 units
+|}
+
+== Unslowable ==
+
+Unslowable, denoted by special attack 12 or "U" (old code), makes the NPC immune to slow effects.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="7"| Unslowable
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Bool || 1 = on, 0 = off || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 12,1
+| 12
+| colspan="3" | Special Attack "Unslowable"
+|-
+| 1 
+| colspan="3" | Special Attack "Unslowable" enabled
+|}
+
+== Unmezable ==
+
+Unmezable, denoted by special attack 13 or "M" (old code), makes the NPC immune to mesmerization effects.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="7"| Unmezable
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Bool || 1 = on, 0 = off || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 13,1
+| 13
+| colspan="3" | Special Attack "Unmezable"
+|-
+| 1 
+| colspan="3" | Special Attack "Unmezable" enabled
+|}
+
+== Uncharmable ==
+
+Uncharmable, denoted by special attack 14 or "C" (old code), makes the NPC immune to charm effects.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="7"| Uncharmable
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Bool || 1 = on, 0 = off || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 14,1
+| 14
+| colspan="3" | Special Attack "Uncharmable"
+|-
+| 1 
+| colspan="3" | Special Attack "Uncharmable" enabled
+|}
+
+== Unstunable ==
+
+Unstunable, denoted by special attack 15 or "N" (old code), makes the NPC immune to stun effects.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="7"| Unstunable
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Bool || 1 = on, 0 = off || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 15,1
+| 15
+| colspan="3" | Special Attack "Unstunable"
+|-
+| 1 
+| colspan="3" | Special Attack "Unstunable" enabled
+|}
+
+== Unsnareable ==
+
+Unsnareable, denoted by special attack 16 or "I" (old code), makes the NPC immune to snare effects.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="7"| Unsnareable
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Bool || 1 = on, 0 = off || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 16,1
+| 16
+| colspan="3" | Special Attack "Unsnareable"
+|-
+| 1 
+| colspan="3" | Special Attack "Unsnareable" enabled
+|}
+
+== Unfeareable ==
+
+Unfearable, denoted by special attack 17 or "D" (old code), makes the NPC immune to fear effects.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="7"| Unfearable
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Bool || 1 = on, 0 = off || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 17,1
+| 17
+| colspan="3" | Special Attack "Unfearable"
+|-
+| 1 
+| colspan="3" | Special Attack "Unfearable" enabled
+|}
+
+
+== Immune to Dispell ==
+
+Immune to Dispell, denoted by special attack 18 or "K" (old code), makes the NPC immune to dispelling spells.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="7"| Immune to Dispell
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Bool || 1 = on, 0 = off || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 18,1
+| 18
+| colspan="3" | Special Attack "Immune to Dispell"
+|-
+| 1 
+| colspan="3" | Special Attack "Immune to Dispell" enabled
+|}
+
+== Immune to Melee ==
+
+Immune to Melee, denoted by special attack 19 or "A" (old code), makes the NPC immune to all melee damage.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="7"| Immune to Melee
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Bool || 1 = on, 0 = off || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 19,1
+| 19
+| colspan="3" | Special Attack "Immune to Melee"
+|-
+| 1 
+| colspan="3" | Special Attack "Immune to Melee" enabled
+|}
+
+== Immune to Magic ==
+
+Immune to Magic, denoted by special attack 20 or "B" (old code), makes the NPC immune to all magic spells.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="7"| Immune to Magic
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Bool || 1 = on, 0 = off || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 20,1
+| 20
+| colspan="3" | Special Attack "Immune to Magic"
+|-
+| 1 
+| colspan="3" | Special Attack "Immune to Magic" enabled
+|}
+
+== Immune to Fleeing ==
+
+Immune to Fleeing, denoted by special attack 21 or "f" (old code), prevents the NPC from fleeing under any circumstances.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="7"| Immune to Fleeing
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Bool || 1 = on, 0 = off || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 21,1
+| 21
+| colspan="3" | Special Attack "Immune to Fleeing"
+|-
+| 1 
+| colspan="3" | Special Attack "Immune to Fleeing" enabled
+|}
+
+== Immune to Non-Bane Damage ==
+
+Immune to Non-Bane Damage, denoted by special attack 22 or "O" (old code), prevents the NPC from being damaged by weapons that don't have the bane type matching its bodytype.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="7"| Immune to Non-Bane Damage
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Bool || 1 = on, 0 = off || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 22,1
+| 22
+| colspan="3" | Special Attack "Immune to Non-Bane Damage"
+|-
+| 1 
+| colspan="3" | Special Attack "Immune to Non-Bane Damage" enabled
+|}
+
+== Immune to Non-Magical Damage ==
+
+Immune to Non-Bane Magical, denoted by special attack 23 or "W" (old code), prevents the NPC from being damaged by weapons that are not magical.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="7"| Immune to Non-Magical Damage
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Bool || 1 = on, 0 = off || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 23,1
+| 23
+| colspan="3" | Special Attack "Immune to Non-Magical Damage"
+|-
+| 1 
+| colspan="3" | Special Attack "Immune to Non-Magical Damage" enabled
+|}
+
+== Will Not Aggro ==
+
+Will Not Aggro, denoted by special attack 24 or "H" (old code), prevents a player from getting on an NPC's hate list.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="7"| Will Not Aggro
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Bool || 1 = on, 0 = off || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 24,1
+| 24
+| colspan="3" | Special Attack "Will Not Aggro"
+|-
+| 1 
+| colspan="3" | Special Attack "Will Not Aggro" enabled
+|}
+
+== Immune to Aggro ==
+
+Immune to Aggro, denoted by special attack 25 or "G" (old code), prevents the NPC from getting on an NPC's hate list.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="7"| Immune to Aggro
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Bool || 1 = on, 0 = off || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 25,1
+| 25
+| colspan="3" | Special Attack "Immune to Aggro"
+|-
+| 1 
+| colspan="3" | Special Attack "Immune to Aggro" enabled
+|}
+
+== Resist Ranged Spells ==
+
+Resist Ranged Spells, denoted by special attack 26 or "g" (old code), prevents the NPC from being damaged from spells cast outside of melee range ("belly caster" mob).
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="7"| Resist Ranged Spells
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Bool || 1 = on, 0 = off || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 26,1
+| 26
+| colspan="3" | Special Attack "Resist Ranged Spells"
+|-
+| 1 
+| colspan="3" | Special Attack "Resist Ranged Spells" enabled
+|}
+
+== See through Feign Death ==
+
+See through Feign Death, denoted by special attack 27 or "d" (old code), prevents the NPC from being fooled by feigning death.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="7"| See through Feign Death
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Bool || 1 = on, 0 = off || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 27,1
+| 27
+| colspan="3" | Special Attack "See through Feign Death"
+|-
+| 1 
+| colspan="3" | Special Attack "See through Feign Death" enabled
+|}
+
+== Immune to Taunt ==
+
+Immune to Taunt, denoted by special attack 28 or "i" (old code), prevents the NPC from taunted by players.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="7"| Immune to Taunt
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Bool || 1 = on, 0 = off || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 28,1
+| 28
+| colspan="3" | Special Attack "Immune to Taunt"
+|-
+| 1 
+| colspan="3" | Special Attack "Immune to Taunt" enabled
+|}
+
+== Tunnel Vision ==
+
+Tunnel Vision, denoted by special attack 29 or "t" (old code), makes anyone not on the top of the hate list generate a different amount of hate.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="8"| Tunnel Vision
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Parameter 0 || aggro modifier || Rule: Aggro:TunnelVisionAggroMod
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 29,1,0
+| 29
+| colspan="3" | Special Attack "Tunnel Vision"
+|-
+| 1 
+| colspan="3" | Special Attack "Tunnel Vision" enabled
+|-
+| 0
+| colspan="3" | aggro modifier 0
+|}
+
+== Does NOT buff/heal friends ==
+
+Does NOT buff/heal friends, denoted by special attack 30 or "n" (old code), makes the NPC NOT buff or heal members of the same faction.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="7"| Does NOT buff/heal friends
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Bool || 1 = on, 0 = off || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 30,1
+| 30
+| colspan="3" | Special Attack "Does NOT buff/heal friends"
+|-
+| 1 
+| colspan="3" | Special Attack "Does NOT buff/heal friends" enabled
+|}
+
+== Unpacifiable ==
+
+Unpacifiable, denoted by special attack 31 or "p" (old code), makes the NPC immune to lull effects.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="7"| Unpacifiable
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Bool || 1 = on, 0 = off || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 31,1
+| 31
+| colspan="3" | Special Attack "Unpacifiable"
+|-
+| 1 
+| colspan="3" | Special Attack "Unpacifiable" enabled
+|}
+
+== Leashed ==
+
+Leashed, denoted by special attack 32 or "J" (old code), makes the NPC return to their aggro point, heal, and wipes their hate list if the NPC is pulled out of a particular range.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="8"| Leashed
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Parameter 0 || range || aggro range * aggro range
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 32,1,150
+| 32
+| colspan="3" | Special Attack "Leashed"
+|-
+| 1 
+| colspan="3" | Special Attack "Leashed" enabled
+|-
+| 150
+| colspan="3" | leash at 150 units
+|}
+
+== Destructible Object ==
+
+Destructible Object, denoted by special attack 34 or "o" (old code), is used on destructing NPCs. (Deprecated?)
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="7"| Destructible Object
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Bool || 1 = on, 0 = off || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 34,1
+| 34
+| colspan="3" | Special Attack "Destructible Object"
+|-
+| 1 
+| colspan="3" | Special Attack "Destructible Object" enabled
+|}
+
+== No Harm from Players ==
+
+No Harm from Players, denoted by special attack 35 or "Z" (old code), prevents players from being able to harm the NPC in any way.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="7"| No Harm from Players
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Bool || 1 = on, 0 = off || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 35,1
+| 35
+| colspan="3" | Special Attack "No Harm from Players"
+|-
+| 1 
+| colspan="3" | Special Attack "No Harm from Players" enabled
+|}
+
+== Always Flee ==
+
+Always Flee, denoted by special attack 36, makes the NPC flee at low health even if faction allies are near.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="7"| Always Flee
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Bool || 1 = on, 0 = off || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 36,1
+| 36
+| colspan="3" | Special Attack "Always Flee"
+|-
+| 1 
+| colspan="3" | Special Attack "Always Flee" enabled
+|}
+
+== Flee Percentage ==
+
+Flee Percentage, denoted by special attack 37, makes the NPC flee at low health even if faction allies are near, at a given percent.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="8"| Flee Percentage
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Level 1 || Percent NPC will flee at || 
+|-
+! colspan="2" | Parameter 0 || Percent chance to flee || 
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 37,10
+| 37
+| colspan="3" | Special Attack "Flee Percentage"
+|-
+| 10
+| colspan="3" | Flee when health reaches 10 percent
+|}
+
+== Allow Beneficial ==
+
+Allow Beneficial, denoted by special attack 38, allows players to cast beneficial spells on the NPC
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="7"| Allow Beneficial
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Bool || 1 = on, 0 = off || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 38,1
+| 38
+| colspan="3" | Special Attack "Allow Beneficial"
+|-
+| 1 
+| colspan="3" | Special Attack "Allow Beneficial" enabled
+|}
+
+== Disable Melee ==
+
+Disable Melee, denoted by special attack 39, makes the NPC unable to melee, but does allow the NPC to aggro.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="7"| Disable Melee
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Bool || 1 = on, 0 = off || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 39,1
+| 39
+| colspan="3" | Special Attack "Disable Melee"
+|-
+| 1 
+| colspan="3" | Special Attack "Disable Melee" enabled
+|}
+
+== Chase Distance ==
+
+Chase Distance, denoted by special attack 40, establishes the minimum and maximum distances between the NPC and an aggro player.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="11"| Chase Distance
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Parameter 0 || Maximum chase distance || 
+|-
+! colspan="2" | Parameter 1 || Minimum chase distance || 
+|-
+! colspan="2" | Parameter 2 || Ignore line of sight || 
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 40,1,200,20
+| 40
+| colspan="3" | Special Attack "Chase Distance"
+|-
+| 1 
+| colspan="3" | Special Attack "Chase Distance" enabled
+|-
+| 200
+| colspan="3" | NPC will chase you if you're greater than 200 units away
+|-
+| 20
+| colspan="3" | NPC will chase you if you'er less than 20 units away
+|}
+
+== Allow Tank ==
+
+Allow Tank, denoted by special attack 41, sets the NPC to allow other NPCs to take aggro from players.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="7"| Allow Tank
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Bool || 1 = on, 0 = off || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 41,1
+| 41
+| colspan="3" | Special Attack "Allow Tank"
+|-
+| 1 
+| colspan="3" | Special Attack "Allow Tank" enabled
+|}
+
+== Ignore Root Aggro ==
+
+Ignore Root Aggro, denoted by special attack 42, sets the NPC to ignore the rules of root aggro--the NPC will not attack the closest player, but rather the player on top of the hate list.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="7"| Ignore Root Aggro
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Bool || 1 = on, 0 = off || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 42,1
+| 42
+| colspan="3" | Special Attack "Ignore Root Aggro"
+|-
+| 1 
+| colspan="3" | Special Attack "Ignore Root Aggro" enabled
+|}
+
+== Casting Resist Diff ==
+
+Casting Resist Diff, denoted by special attack 43, makes the NPC's spells cast at a different resist level.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="8"| Casting Resist Diff
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Parameter 0 || Flat modifier to the resist diff of the spell || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="5"| 43,1,-200
+| 43
+| colspan="3" | Special Attack "Casting Resist Diff"
+|-
+| 1 
+| colspan="3" | Special Attack "Casting Resist Diff" enabled
+|-
+| -200 
+| colspan="3" | Add -200 to the resist modifier for the spell cast
+|}
+
+== Max Special Attack ==
+
+Max Special Attack, denoted by special attack 44, makes the NPC more likely to hit a player, decreasing their chance for at avoiding melee through dodge/parry/riposte/etc.
+
+{| class="wikitable" style="border: none; background: none;" 
+! rowspan="19"| Max Special Attack
+|-
+! colspan="3" | Settings !! Defaults
+|-
+! colspan="2" | Parameter 0 || Flat negative percent modifier to all avoidance skills || 0
+|-
+! colspan="2" | Parameter 1 || Flat negative percent modifier to riposte skill || 0
+|-
+! colspan="2" | Parameter 2 || Flat negative percent modifier to parry skill || 0
+|-
+! colspan="2" | Parameter 3 || Flat negative percent modifier to block skill || 0
+|-
+! colspan="2" | Parameter 4 || Flat negative percent modifier to dodge skill || 0
+|-
+! colspan="7" |Example
+|-
+! rowspan="3"| 44,1,50
+| 44
+| colspan="3" | Special Attack "Max Special Attack"
+|-
+| 1 
+| colspan="3" | Special Attack "Max Special Attack" enabled
+|-
+| 50
+| colspan="3" | 50 percent reduction to ALL avoidance skills
+|-
+! colspan="7" |Example 2
+|-
+! rowspan="7"| 44,1,0,0,0,0,50
+| 44
+| colspan="3" | Special Attack "Max Special Attack"
+|-
+| 1 
+| colspan="3" | Special Attack "Max Special Attack" enabled
+|-
+| 0
+| colspan="3" | 0 percent reduction to ALL avoidance skills
+|-
+| 0
+| colspan="3" | 0 percent reduction to riposte avoidance skill
+|-
+| 0
+| colspan="3" | 0 percent reduction to parry avoidance skill
+|-
+| 0
+| colspan="3" | 0 percent reduction to block avoidance skill
+|-
+| 0
+| colspan="3" | 50 percent reduction to dodge avoidance skill
+|}
